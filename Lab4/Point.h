@@ -39,5 +39,42 @@ public:
 	Point operator/(const double a) {
 		return Point(x / a, y / a);
 	}
+
+	double operator*(const Point p) {
+		return x * p.x + y * p.y;
+	}
 };
 
+class Matrix {
+public:
+	Point a;
+	Point b;
+
+	Matrix() {
+		a = Point();
+		b = Point();
+	} 
+
+	Matrix(Point p1, Point p2) {
+		a = p1;
+		b = p2;
+	}
+
+	double det() {
+		return a.x * b.y - a.y * b.x;
+	}
+
+	void inverse() {
+		double det = this->det();
+		if (det == 0) return;
+		double temp = a.x;
+		a.x = b.y / det;
+		b.y = temp / det;
+		a.y /= -det;
+		b.x /= -det;
+	}
+
+	Point operator*(const Point p) {
+		return Point(a.x * p.x + a.y * p.y, b.x * p.x + b.y * p.y);
+	}
+};
