@@ -319,10 +319,15 @@ LPProblem* LPProblem::dual() {
 	vector<int> new_signs;
 	for (auto& sign : res_signs) {
 		if (sign == 0) new_signs.push_back(0);
-		else if (sign == 1) new_signs.push_back(2);
-		else if (sign == 2) new_signs.push_back(1);
+		else if (sign == 2) new_signs.push_back(2);
+		else if (sign == 1) new_signs.push_back(1);
 	}
-	vector<int> new_res_signs = signs;
+	vector<int> new_res_signs;
+	for (auto& sign : signs) {
+		if (sign == 0) new_res_signs.push_back(0);
+		else if (sign == 1) new_res_signs.push_back(2);
+		else if (sign == 2) new_res_signs.push_back(1);
+	}
 	vector<vector<double>> new_res_matrix(new_res_num);
 	for (int i = 0; i < new_res_num; i++) {
 		for (int j = 0; j < new_var_num; j++) {
